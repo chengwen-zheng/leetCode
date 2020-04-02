@@ -87,7 +87,6 @@ console.timeEnd("quickSort");
 
 console.time("bubble Sort");
 console.log(sortArray(nums));
-endTime =  +new Date();
 console.timeEnd("bubble Sort");
 
 

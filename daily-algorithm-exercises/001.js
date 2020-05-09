@@ -11,24 +11,33 @@
     [-1, -1, 2]
 ]
  */
-var nums = [-1, 0, 1, 2, -1, -4, 5, 67, -3, 4];
+var nums = [-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0];
 
 var threeSum = function (nums) {
-    nums = nums.sort((a, b) => a > b)
+    nums = nums.sort((a, b) => a - b)
+    let n = nums.length;
     let res = [];
-    if (nums < 3) return;
-    for (let i = 0; i < nums.length; i++) {
+    if (n < 3) return res;
+    for (let l, r, i = 0; i < nums.length; i++) {
         if (nums[i] > 0) {
+            return res;
+        } else if (i > 0 && nums[i] === nums[i - 1]) {
             continue;
         } else {
-            let l = i - 1;
-            let r = i + 1;
-            if (l >= 0 && r <= nums.length - 1 && nums[i] + nums[l] + nums[r] === 0) {
-                res.push([nums[i], nums[l], nums[r]])
-            } else if (l >= 0 && r <= nums.length - 1 && nums[i] + nums[l] + nums[r] > 0) {
-                l -= 1
-            } else if (l >= 0 && r <= nums.length - 1 && nums[i] + nums[l] + nums[r] < 0) {
-                r += 1;
+            l = i + 1;
+            r = n - 1;
+            while (r > l) {
+                if (nums[i] + nums[l] + nums[r] === 0) {
+                    while (r > l && nums[r] === nums[r - 1]) r = r - 1;
+                    while (r > l && nums[l] === nums[l + 1]) l = l + 1;
+                    res.push([nums[i], nums[l], nums[r]])
+                    l = l + 1;
+                    r = r - 1;
+                } else if (nums[i] + nums[l] + nums[r] > 0) {
+                    r += -1;
+                } else if (nums[i] + nums[l] + nums[r] < 0) {
+                    l += 1;
+                }
             }
         }
     }

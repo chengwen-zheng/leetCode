@@ -14,8 +14,13 @@
     字符串只包含从 a-z 的小写字母。字符串的最大长度是50000。
 */
 
-var isReturn =  0
+
 var validPalindrome = function (s) {
+    var isReturn = 0;
+    return validate(s, isReturn);
+};
+
+var validate = function (s, isReturn) {
     let k = 0, j = s.length - 1;
     while (k < j) {
         if (s.charAt(k) === s.charAt(j)) {
@@ -24,13 +29,13 @@ var validPalindrome = function (s) {
         } else {
             if (isReturn === 0) {
                 isReturn++;
-                return validPalindrome(s.substring(k, j)) || validPalindrome(s.substring(k + 1, j + 1));
+                return validate(s.substring(k, j), isReturn) || validate(s.substring(k + 1, j + 1), isReturn);
             }
             return false;
         }
     }
     return true;
-};
+}
 
 
-console.log(validPalindrome("deeee"));
+console.log(validPalindrome("abc"));

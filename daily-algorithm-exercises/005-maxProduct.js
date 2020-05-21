@@ -14,25 +14,16 @@
 */
 
 var maxProduct = function (nums) {
-    let total = nums[0];
-    let ret = nums[0];
-    let tmp = nums[0];
-    for (let i = 0, j = 0; i < nums.length; i++, j = i) {
-        total = 1;
-        tmp = nums[i];
-        while (j < nums.length) {
-            if (nums[j] < 0 && i !== j) {
-                tmp = total;
-            } else if (nums[j] === 0 && i !== j) {
-                break;
-            }
-            total = total * nums[j];
-            j++;
-        }
-        total = total > tmp ? total : tmp;
-        ret = ret > total ? ret : total;
+    let min, max, minTemp, maxTemp, ans;
+    min = max = minTemp = maxTemp = ans = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        minTemp = min;
+        maxTemp = max;
+        max = Math.max(maxTemp * nums[i], Math.max(nums[i], minTemp * nums[i]));
+        min = Math.min(minTemp * nums[i], Math.min(nums[i], maxTemp * nums[i]));
+        ans = Math.max(max, ans);
     }
-    return ret;
+    return ans;
 }
 
-console.log(maxProduct([-2,0,-1]));
+console.log(maxProduct([-4, -3, -2]));

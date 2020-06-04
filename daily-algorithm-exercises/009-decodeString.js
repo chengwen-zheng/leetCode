@@ -24,22 +24,33 @@ var decodeString = function (s) {
     let stack = [];
     let temp = {};
     let res = '';
+    let k;
     for (let i = 0, c; i < s.length; i++) {
         c = s.charAt(i);
         if (c === '[') {
             // 起始入栈操作
-            temp = {string: '', multi: 0};
+            temp = {string: '', multi: k};
             stack.push(temp);
         } else if (c === ']') {
             // 出栈操作，拼接字符
-            res += stack.pop().string.repeat(stack.pop().multi);
+            let last = stack.pop();
+            if (stack.length) {
+                stack[stack.length - 1].string += last.string.repeat(last.multi);
+            } else {
+                res += last.string.repeat(last.multi);
+            }
         } else if (c >= '0' && c <= '9') {
-            temp.multi = Number.parseInt(c);
+            k = Number.parseInt(c);
         } else {
-            temp.string += c;
+            if (stack.length) {
+                stack[stack.length - 1].string += c;
+            } else {
+                res += c;
+            }
+
         }
     }
     return res;
 };
 
-decodeString("3[a2[c]]");
+console.log(decodeString("3[a]2[bc]"));

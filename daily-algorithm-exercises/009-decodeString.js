@@ -24,13 +24,14 @@ var decodeString = function (s) {
     let stack = [];
     let temp = {};
     let res = '';
-    let k;
+    let k = '';
     for (let i = 0, c; i < s.length; i++) {
         c = s.charAt(i);
         if (c === '[') {
             // 起始入栈操作
             temp = {string: '', multi: k};
             stack.push(temp);
+            k = '';
         } else if (c === ']') {
             // 出栈操作，拼接字符
             let last = stack.pop();
@@ -40,7 +41,7 @@ var decodeString = function (s) {
                 res += last.string.repeat(last.multi);
             }
         } else if (c >= '0' && c <= '9') {
-            k = Number.parseInt(c);
+            k += c;
         } else {
             if (stack.length) {
                 stack[stack.length - 1].string += c;
@@ -53,4 +54,4 @@ var decodeString = function (s) {
     return res;
 };
 
-console.log(decodeString("3[a]2[bc]"));
+console.log(decodeString("3[a2[c]]"));

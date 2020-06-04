@@ -54,4 +54,41 @@ var decodeString = function (s) {
     return res;
 };
 
-console.log(decodeString("3[a2[c]]"));
+
+// 递归解法，耗时更多。重要是找到起始条件。
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeStringRecursive = function (s) {
+    return dfs(s, 0);
+}
+
+function dfs(s, i) {
+    let c;
+    let multi = '', res = '';
+    let temp = '';
+    while (i < s.length) {
+        c = s.charAt(i)
+        if (c >= '0' && c <= '9') {
+            multi += c;
+        } else if (c === '[') {
+            temp = dfs(s, i + 1);
+            res = res + temp.res.repeat(Number.parseInt(multi));
+            // 这里的i要用返回的i; 时间复杂度 O(N)O(N)，递归会更新索引，因此实际上还是一次遍历 s
+            i = temp.i;
+            multi = '';
+        } else if (c === ']') {
+            // 终止条件
+            return {res, i};
+        } else {
+            res += c;
+        }
+        i++;
+    }
+    return res;
+}
+
+
+console.log(decodeStringRecursive("a2[abc]3[cd]ef"));
+console.log(decodeString("a2[abc]3[cd]ef"));

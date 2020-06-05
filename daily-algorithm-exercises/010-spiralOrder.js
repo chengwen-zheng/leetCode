@@ -28,31 +28,31 @@
 var spiralOrder = function (matrix) {
     let intervalValue = 0;
     let res = [];
-    while (intervalValue < matrix.length/2 && intervalValue < matrix[0].length/2){
-        dfs(matrix,intervalValue,res);
+    while (intervalValue < matrix.length / 2 && intervalValue < matrix[0].length / 2) {
+        dfs(matrix, intervalValue, res);
         intervalValue++;
     }
     return res;
 };
 
-var dfs = function(matrix,intervalValue,res){
+var dfs = function (matrix, intervalValue, res) {
     // 横向增加
     let i, j = intervalValue;
     for (i = intervalValue; i < matrix[j].length - intervalValue; i++) {
         res.push(matrix[j][i]);
     }
     // 纵向增加
-    for (j = intervalValue + 1; j < matrix.length - intervalValue; j++) {
-        res.push(matrix[j][i-1]);
+    for (j = intervalValue + 1; j < matrix.length - intervalValue && matrix.length - 2 * intervalValue > 1; j++) {
+        res.push(matrix[j][i - 1]);
     }
     // 横向减少
-    for (i = i-1; i > intervalValue && matrix.length - intervalValue > 2; i--) {
-        res.push(matrix[j-1][i-1]);
+    for (i = i - 1; i > intervalValue && matrix.length - 2 * intervalValue > 1; i--) {
+        res.push(matrix[j - 1][i - 1]);
     }
     // 纵向减少
-    for (j = j-1; j > intervalValue+1; j--) {
-        res.push(matrix[j-1][i]);
+    for (j = j - 1; j > intervalValue + 1 && matrix.length - 2 * intervalValue > 1; j--) {
+        res.push(matrix[j - 1][i]);
     }
 }
 
-console.log(spiralOrder([[1,2],[3,4]]));
+console.log(spiralOrder([[2, 3, 4], [5, 6, 7], [8, 9, 10], [11, 12, 13], [14, 15, 16]]));

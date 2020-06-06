@@ -37,8 +37,8 @@ var spiralOrder = function (matrix) {
 
 var dfs = function (matrix, intervalValue, res) {
     // 横向增加
-    let i, j = intervalValue;
-    for (i = intervalValue; i < matrix[j].length - intervalValue; i++) {
+    let i = intervalValue, j = intervalValue;
+    for (; i < matrix[j].length - intervalValue; i++) {
         res.push(matrix[j][i]);
     }
     // 纵向增加
@@ -50,7 +50,7 @@ var dfs = function (matrix, intervalValue, res) {
         res.push(matrix[j - 1][i - 1]);
     }
     // 纵向减少
-    for (j = j - 1; j > intervalValue + 1 && matrix.length - 2 * intervalValue > 1; j--) {
+    for (j = j - 1; j > intervalValue + 1 && matrix.length - 2 * intervalValue > 1 && matrix[0].length - 2 * intervalValue > 1; j--) {
         res.push(matrix[j - 1][i]);
     }
 }

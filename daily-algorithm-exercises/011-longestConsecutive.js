@@ -13,10 +13,31 @@
 链接：https://leetcode-cn.com/problems/longest-consecutive-sequence
 
 */
+
+// 超出时间限制
+
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var longestConsecutive = function(nums) {
-
+var longestConsecutive = function (nums) {
+    let res = [], temp = [];
+    let currentValue;
+    for (let i = 0; i < nums.length; i++) {
+        currentValue = nums[i];
+        if (!temp.includes(currentValue)) {
+            // 清空数组
+            temp = [];
+            while (nums.includes(currentValue) && !temp.includes(currentValue)) {
+                temp.push(currentValue);
+                currentValue++;
+            }
+        }
+        if (temp.length > res.length) {
+            res = temp.slice(0, temp.length);
+        }
+    }
+    return res.length;
 };
+
+console.log(longestConsecutive([100, 4, 200, 1, 3, 2, 6, 8098, 5,89]));

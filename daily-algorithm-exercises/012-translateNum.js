@@ -12,16 +12,34 @@
 
 
 提示：
-0 <= num < 231
+0 <= num < 2^31
 
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/
 */
 
+// 动态规划的（滚动数组优化空间）
 /**
  * @param {number} num
  * @return {number}
  */
-var translateNum = function(num) {
-
+var translateNum = function (num) {
+    let numString = num.toString()
+    let counts = 1, p = 0, q = 0;
+    for (let i = 0; i < numString.length; i++) {
+        p = q;
+        q = counts;
+        counts = 0;
+        counts += q;
+        if (i === 0) {
+            continue;
+        }
+        let pre = numString.substring(i - 1, i + 1);
+        if (pre <= 25 && pre >= 10) {
+            counts += p;
+        }
+    }
+    return counts;
 };
+
+console.log(translateNum(12258));

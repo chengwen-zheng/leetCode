@@ -18,7 +18,7 @@
 链接：https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/
 */
 
-// 动态规划的（滚动数组优化空间）
+// 动态规划的（滚动数组优化空间）f(n) = f(n-1) + f(n-2)
 /**
  * @param {number} num
  * @return {number}
@@ -29,8 +29,6 @@ var translateNum = function (num) {
     for (let i = 0; i < numString.length; i++) {
         p = q;
         q = counts;
-        counts = 0;
-        counts += q;
         if (i === 0) {
             continue;
         }

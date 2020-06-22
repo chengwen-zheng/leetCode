@@ -62,11 +62,13 @@ const lenLongestFibSubseq = function (A) {
 };
 
 // 动态规划
+// 状态定义: dp[i][j]：表示以A[i],A[j]结尾的斐波那契数列的最大长度
 /**
  * @param {number[]} A
  * @return {number}
  */
 const lenLongestFibSubseqDp = function (A) {
+    // dp[i][j]：表示以A[i],A[j]结尾的斐波那契数列的最大长度
     let dp = Array.from({length: A.length}, () => new Array(A.length - 1).fill(0));
     let maxLen = 0;
     let intMap = new Map();

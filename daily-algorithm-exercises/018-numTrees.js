@@ -15,7 +15,11 @@
  2     1         2                 3
 
  来源：力扣（LeetCode）
- 链接：https://leetcode-cn.com/problems/unique-binary-search-trees*/
+ 链接：https://leetcode-cn.com/problems/unique-binary-search-trees
+
+ 注：二叉排序树中，左子树都比节点小，右子树都比节点大
+ */
+
 
 
 /**

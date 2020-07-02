@@ -1,3 +1,8 @@
+/**
+ 来源：https://leetcode-cn.com/problems/sort-an-array/
+ */
+
+
 // bubble sort
 let sortArray = function (nums) {
     for (let i = 0; i < nums.length - 1; i++) {
@@ -12,8 +17,6 @@ let sortArray = function (nums) {
     return nums;
 };
 
-
-// console.log(sortArray(nums));
 
 // Quick Sort. 利用的是三数取中
 let quiteSort = function (nums, first, last) {
@@ -70,14 +73,44 @@ let Swap = function (arr, key1, key2) {
 }
 
 
+/**
+ * Selecction Sort
+ * */
+let selectionSort = function (nums) {
+    let min;
+    for (let i = 0; i < nums.length; i++) {
+        min = i;
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[j] < nums[min]) {
+                Swap(nums, j, min);
+            }
+        }
+    }
+    return nums;
+}
+
+/**
+ * InsertionSort Sort
+ * */
+let insertionSort = function (nums) {
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i; j > 0 && nums[j] < nums[j - 1]; j--) {
+            Swap(nums, j, j - 1);
+        }
+    }
+    return nums;
+}
+
+
 let getRandomNumArray = function () {
     let arr = new Array();
-    while (arr.length < 1000000) {
+    while (arr.length < 100) {
         let num = Math.floor(Math.random() * 1000000);
         arr.push(num);
     }
     return arr;
 }
+
 let nums = getRandomNumArray();
 
 console.time("quickSort");
@@ -89,4 +122,13 @@ console.time("bubble Sort");
 console.log(sortArray(nums));
 console.timeEnd("bubble Sort");
 
+
+console.time("selection Sort");
+console.log(selectionSort(nums));
+console.timeEnd("selection Sort");
+
+
+console.time("insertionSort Sort");
+console.log(selectionSort(nums));
+console.timeEnd("insertionSort Sort");
 

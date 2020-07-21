@@ -102,16 +102,38 @@ let insertionSort = function (nums) {
 }
 
 
-let getRandomNumArray = function () {
+/**
+ * Shell Sort
+ * */
+let shellSort = function (nums) {
+    let numsLength = nums.length;
+    let h = 1;
+    while (h < (numsLength / 3)) {
+        h = 3 * h + 1;
+    }
+    while (h >= 1) {
+        console.log("===============" + h + "===============")
+        for (let i = h; i < numsLength; i++) {
+            for (let j = i; j >= h && nums[j] < nums[j - h]; j -= h) {
+                Swap(nums, j, j - h);
+            }
+        }
+        h = Math.floor(h / 3);
+    }
+    return nums;
+}
+
+
+let getRandomNumArray = function (numsLength, T) {
     let arr = new Array();
-    while (arr.length < 100) {
-        let num = Math.floor(Math.random() * 1000000);
+    while (arr.length < numsLength) {
+        let num = Math.floor(Math.random() * T);
         arr.push(num);
     }
     return arr;
 }
 
-let nums = getRandomNumArray();
+let nums = getRandomNumArray(100,100);
 
 console.time("quickSort");
 console.log(quiteSort(nums, 0, nums.length - 1));
@@ -129,6 +151,6 @@ console.timeEnd("selection Sort");
 
 
 console.time("insertionSort Sort");
-console.log(selectionSort(nums));
+console.log(shellSort(nums));
 console.timeEnd("insertionSort Sort");
 

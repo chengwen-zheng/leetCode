@@ -73,7 +73,7 @@ var topKFrequentPro = function (nums, k) {
 		if (this.count < k) {
 			buildHeap(heap, key, value, k)
 		} else {
-        // count小于k时，比较顶部数的频率和当前数频率，进行堆化。
+        // count大于k时，比较顶部数的频率和当前数频率，进行堆化。
 			if (value > heap[1][1]) {
 				heap[1] = [key, value]
 				heapify(heap)

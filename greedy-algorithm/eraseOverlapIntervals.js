@@ -40,8 +40,10 @@ var eraseOverlapIntervals = function(intervals) {
     for(let k = 0; k < intervals.length; k++) {
         let min = [];
         for(let i = 0; i < intervals.length; i++) {
-            if(arr.length === 0) {
-                min = intervals[i];
+            if(arr.length === 0 ) {
+                if(min.length === 0 || min.length !== 0 && min[1] > intervals[i][1]) {
+                    min = intervals[i];
+                }
                 continue;
             }
 
@@ -62,4 +64,4 @@ var eraseOverlapIntervals = function(intervals) {
     return intervals.length - arr.length;
 };
 
-console.log(eraseOverlapIntervals([ [1,2], [2,3], [3,4], [1,3] ]))
+console.log(eraseOverlapIntervals([ [1,2], [2,3] ]));

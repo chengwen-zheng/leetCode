@@ -53,9 +53,7 @@
             // 当前数组和最小数组无交集
             min += 1;
             minPoint = points[i];
-            debugger
         } else {
-            debugger
             minPoint = [points[i][0], Math.min(points[i][1], minPoint[1])];
         }
         console.log(min, minPoint, 'dsf')

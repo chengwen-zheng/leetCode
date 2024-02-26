@@ -51,7 +51,7 @@ function Clone(value) {
 
 function try_get_sub(array) {
     const calcedValue = memorized[JSON.stringify(array)]
-    if(calcedValue){
+    if (calcedValue) {
         return memorized[JSON.stringify(array)];
     } else {
         return Fail;
@@ -66,11 +66,11 @@ function calc(arr) {
     const [first, ...others] = arr;
 
     const othersSubArray = try_get_sub(Clone(others));
-    if(othersSubArray != Fail) {
+    if (othersSubArray != Fail) {
         let genArray = othersSubArray.map(value => {
             return [...value, first];
         });
-    
+
         return [...genArray, [first], ...othersSubArray];
     } else {
         pending.push({
@@ -112,4 +112,4 @@ function checkSubarraySumPrue(arr, S) {
     return false
 }
 
-console.log(checkSubarraySumPrue([3,34,4,12,5,2], 9))
+console.log(checkSubarraySumPrue([3, 34, 4, 12, 5, 2], 9))

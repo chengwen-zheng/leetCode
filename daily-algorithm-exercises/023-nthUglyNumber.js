@@ -68,14 +68,23 @@ console.log(nthUglyNumber(10));
  */
 var nthUglyNumberPro = function (n) {
   let i = 1;
-  let stack = new Set([i]);
-  while (stack.size < n) {
-    stack.add(2 * i).add(3 * i).add(5 * i);
+  let seen = new Set([1]);
+  let minHap = [1];
+  let ugly;
+  while (i <= n) {
+    ugly = minHap.pop();
+    [2, 3, 5].forEach(item => {
+      let prime = item * ugly;
+      if (!seen.has(prime)) {
+        seen.add(prime);
+        minHap.push(prime);
+        minHap.sort((a, b) => b - a);
+      };
+    });
     i++;
   }
 
-  return Array.from(stack).sort((a, b) => a - b)[n-1];
+  return ugly;
 };
 
 console.log(nthUglyNumberPro(10));
-

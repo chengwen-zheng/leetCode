@@ -14,7 +14,7 @@
 // 输入：n = 1
 // 输出：1
 // 解释：1 通常被视为丑数
-
+// https://leetcode.cn/problems/ugly-number-ii/
 
 
 function isUglyNumber(n) {

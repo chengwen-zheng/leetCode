@@ -44,4 +44,48 @@ var threeSum = function (nums) {
     return res;
 };
 
+
+var threeSumPro = function (nums) {
+    let results = [];
+    sums = nums.sort((a, b) => a - b);
+    let left = 0;
+    let right = sums.length - 1;
+
+    for (let i = 0; i <= sums.length - 1; i++) {
+        if(sums[i] > 0) {
+            return results;
+        }
+        // 对i去重, 这里去重要注意 i - 1
+        if (i > 0 && nums[i] === nums[i - 1]) {
+            continue;
+        }
+
+        left = i + 1;
+        right = sums.length - 1;
+        while (left < right) {
+            let total = sums[i] + sums[left] + sums[right];
+            if (total < 0) {
+                left++;
+            } else if (total > 0) {
+                right--;
+            } else {
+                results.push([sums[i], sums[left], sums[right]]);
+                // 对left去重
+                left++;
+                while (sums[left] === sums[left + 1]) {
+                    left++;
+                }
+                // 对right进行去重;
+                right--;
+                while (sums[right] === sums[right + 1]) {
+                    right--;
+                }
+            }
+        }
+    }
+
+    return results;
+
+};
+
 console.log(threeSum(nums))

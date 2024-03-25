@@ -45,7 +45,7 @@ let Partition = function (arr, first, last) {
         arr = Swap(arr, first, last);
     }
     arr = Swap(arr, last, key);
-    return {partition: first, nums: arr};
+    return { partition: first, nums: arr };
 }
 
 
@@ -124,6 +124,49 @@ let shellSort = function (nums) {
 }
 
 
+/**
+ * 归并排序
+ * */
+let merge = function (nums, tempNums, leftFirtIndex, middle, rightLastIndex) {
+    let rightIndex = middle + 1;
+    let leftIndex = leftFirtIndex;
+    for (let k = leftFirtIndex; k <= rightLastIndex; k++) {
+        tempNums[k] = nums[k];
+    }
+
+    for (let k = leftFirtIndex; k <= rightLastIndex; k++) {
+        if (leftIndex > middle + 1) {
+            nums[k] = tempNums[rightIndex++];
+        } else if (rightIndex > rightLastIndex) {
+            nums[k] = tempNums[leftIndex++];
+        } else if (tempNums[leftIndex] > tempNums[rightIndex]) {
+            nums[k] = tempNums[rightIndex++];
+        } else {
+            nums[k] = tempNums[leftIndex++];
+        }
+    }
+
+
+};
+
+let sort = function (nums, tempNums, start, last) {
+    let middle = (start + last) >>> 1;
+
+    if (start >= last) {
+        return;
+    }
+
+    sort(nums, tempNums, start, middle);
+    sort(nums, tempNums, middle + 1, last);
+    merge(nums, tempNums, start, middle, last);
+}
+
+let mergeSort = function (nums) {
+    let tempNums = [];
+    sort(nums, tempNums, 0, nums.length - 1);
+    return nums;
+}
+
 let getRandomNumArray = function (numsLength, T) {
     let arr = new Array();
     while (arr.length < numsLength) {
@@ -133,7 +176,8 @@ let getRandomNumArray = function (numsLength, T) {
     return arr;
 }
 
-let nums = getRandomNumArray(100,100);
+
+let nums = getRandomNumArray(100, 100);
 
 console.time("quickSort");
 console.log(quiteSort(nums, 0, nums.length - 1));
@@ -154,3 +198,7 @@ console.time("insertionSort Sort");
 console.log(shellSort(nums));
 console.timeEnd("insertionSort Sort");
 
+
+console.time("mergeSort Sort");
+console.log(mergeSort(nums));
+console.timeEnd("mergeSort Sort");
